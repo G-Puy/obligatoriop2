@@ -1,0 +1,72 @@
+﻿<form method="post" id="formid">
+
+
+    <label>Nombre Lugar:</label><br>
+    <input type="text" name="nombre" id="nombre"><br>
+
+    <input type="submit" value="Aceptar">
+</form>
+<div>
+    <table class="table">
+        <tr>
+            <td>
+                Lugares disponibles
+            </td>
+        </tr>
+        @foreach (Lugar item in ViewBag.lugares)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+            </tr>
+        }
+        <p id="msj"></p>
+    </table>
+
+
+
+
+</div>
+@if (ViewBag.actividades != null)
+{
+    <table border="1" textaling="center">
+        <tr>
+            <td>Nombre Actividad</td>
+            <td>Categora</td>
+            <td>Lugar</td>
+            <td>Edad Minima</td>
+        </tr>
+        @foreach (var a in ViewBag.actividades)
+        {
+            <tr>
+                <td>@a.Nombre</td>
+                <td>@a.Categoria </td>
+                <td>@a.Lugar.Nombre</td>
+                <td>@a.MinimaEdad</td>
+
+            </tr>
+        }
+        
+
+
+
+    </table>
+}
+else
+{
+    <p>@ViewBag.mensaje</p>
+}
+
+<script>
+    document.querySelector("#formid").addEventListener("submit", verificar)
+    function verificar(evento) {
+        evento.preventDefault();
+        let nombre = document.querySelector("#nombre").value;
+        if (nombre != "") {
+            this.submit();
+        } else {
+            document.querySelector("#msj").innerHTML = "Verificar los datos";
+        }
+    }
+
+
+</script>

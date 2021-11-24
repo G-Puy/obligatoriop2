@@ -1,0 +1,101 @@
+﻿<h1>Comprar</h1>
+<h3>Detalles de la compra</h3>
+
+<form id="formCompra" method="post">
+
+    <input type="number" name="idActividad" value="@ViewBag.Actividad.idActi" style="display:none"><br>
+
+    <label>Nombre actividad: </label><br>
+    <input type="text" name="nombreAct" value="@ViewBag.Actividad.Nombre" readonly><br>
+
+    <label>Categoria: </label><br>
+    <input type="text" name="categoria" value="@ViewBag.Actividad.Categoria" readonly><br>
+
+    <label>Fecha y hora: </label><br>
+    <input type="text" name="fechayhora" value="@ViewBag.Actividad.FechaYHora" readonly><br>
+
+    <label>Lugar: </label><br>
+    <input type="text" name="lugar" value="@ViewBag.Actividad.Lugar" readonly><br>
+
+    <label>Edad minima</label><br>
+    <input type="text" name="edadMinima" value="@ViewBag.Actividad.MinimaEdad" readonly><br>
+
+    <label>Precio: </label><br>
+    <input type="number" name="precio" value="@ViewBag.Actividad.PrecioActividad()" readonly id="idPrecioAct"><br>
+
+
+
+
+    <div id="divSeleccionEntradas">
+        <label>Cantidad de entradas: </label><br>
+        <input type="number" name="" value="" id="cantEntradas"><br>
+        <input type="button" value="Seleccionar" id="btnSeleccionar" onclick=verificarParaCalcular();>
+    </div>
+
+
+    <div style="display: none" id="idDivComprar">
+
+        <label>Total a pagar: </label><br>
+        <input type="number" name="" value="" readonly id="idTotalAPagar"><br>
+
+        <label>Cantidad de entradas: </label><br>
+        <input type="number" name="cantEnt" value="" id="idCantEnt" readonly><br>
+
+        <input type="submit" value="Comprar" id="">
+        <input type="button" value="Volver a seleccionar entradas" onclick=volver();>
+    </div>
+
+</form>
+<p id="msjRes"></p>
+
+<script>
+    function verificarParaCalcular() {
+        let cantEnt = document.querySelector("#cantEntradas").value;
+        if (cantEnt != "" && cantEnt > 0) {
+            calcularPrecio();
+        } else {
+            document.querySelector("#msjRes").innerHTML = "Seleccione cantidad de entradas";
+        }
+
+    }
+
+    function calcularPrecio() {
+        document.querySelector("#idDivComprar").style.display = "block";
+        document.querySelector("#divSeleccionEntradas").style.display = "none";
+        let cantEnt = document.querySelector("#cantEntradas").value;
+        
+            if (cantEnt > 5 && cantEnt != 0) {
+
+                let precioAct = document.querySelector("#idPrecioAct").value;
+                let precioTotal = cantEnt * precioAct;
+                precioTotal -= precioTotal * 0.05;
+                document.querySelector("#idCantEnt").value = cantEnt;
+                document.querySelector("#idTotalAPagar").value = precioTotal;
+            } else {
+
+                let precioAct = document.querySelector("#idPrecioAct").value;
+                let precioTotal = cantEnt * precioAct;
+                document.querySelector("#idCantEnt").value = cantEnt;
+                document.querySelector("#idTotalAPagar").value = precioTotal;
+            }
+       
+
+
+    }
+    function volver() {
+        document.querySelector("#idDivComprar").style.display = "none";
+        document.querySelector("#divSeleccionEntradas").style.display = "block";
+    }
+
+    document.querySelector("#formCompra").addEventListener("submit", VerificarYenviar)
+    function VerificarYenviar(evento) {
+        evento.preventDefault();
+        let cantidadEntradas = document.querySelector("#idCantEnt").value;
+        if (cantidadEntradas > 0 ) {
+            this.submit();
+        } else {
+            document.querySelector("#msjRes").innerHTML = "Error en la compra";
+        }
+    }
+</script>
+@ViewBag.Resultado

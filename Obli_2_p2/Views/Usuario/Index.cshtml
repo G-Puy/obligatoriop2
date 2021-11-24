@@ -1,0 +1,22 @@
+﻿<h2>Lista Actividades</h2>
+<table class="table" textaling="center">
+    <tr>
+        <td>Nombre</td>
+        <td>Categoria</td>
+        <td>Fecha y hora</td>
+        <td>Lugar</td>
+        <td>Edad minima</td>
+        <td>Precio</td>
+    </tr>
+    @foreach (var act in ViewBag.ListaActividades)
+    {
+<tr>
+    <td>@act.Nombre</td>
+    <td>@act.Categoria</td>
+    <td>@act.FechaYHora</td>
+    <td>@act.Lugar</td>
+    <td>@act.MinimaEdad</td>
+    <td>@act.PrecioActividad()</td>
+</tr>
+    }
+</table>

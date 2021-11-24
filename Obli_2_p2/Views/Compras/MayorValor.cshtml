@@ -1,0 +1,24 @@
+﻿
+
+    @if (ViewBag.compras != null)
+    {<table>
+    <tr>
+        <td>Nombre Actividad</td>
+        <td>Cantidad Entradas</td>
+        <td>Total</td>
+        <td>Fecha y hora</td>
+        <td>Estado</td>
+    </tr>
+    @foreach (var comp in ViewBag.compras)
+    {
+        <tr>
+            <td>@comp.ActividadComprada.Nombre</td>
+            <td>@comp.CantEntradas</td>
+            <td>@comp.PrecioFinal</td>
+            <td>@comp.FechaCompra</td>
+            <td>@comp.Estado</td>
+        </tr>
+    }
+</table>
+
+            }

@@ -1,0 +1,19 @@
+﻿<table>
+    <tr>
+        <td>Nombre</td>
+        <td>Apellido</td>
+        <td>Fecha De nacimiento</td>
+        <td>Email</td>
+        <td>Nick</td>
+    </tr>
+    @foreach (var c in ViewBag.ListaClientes)
+    {
+        <tr>
+            <td>@c.Nombre</td>
+            <td>@c.Apellido</td>
+            <td>@c.FechaNacimiento</td>
+            <td>@c.Email</td>
+            <td>@c.Nick</td>
+        </tr>
+    }
+</table>

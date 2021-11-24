@@ -1,0 +1,30 @@
+﻿<h1>compra</h1>
+<h2>Lista Compras Realizadas</h2>
+<table border="1" textaling="center">
+    <tr>
+        <td>Nombre Actividad</td>
+        <td>Cantidad Entradas</td>
+        <td>Total</td>
+        <td>Fecha y hora</td>
+        <td>Estado</td>
+        <td></td>
+    </tr>
+    @foreach (var comp in ViewBag.ListaComprasHechas)
+    {
+<tr>
+    <td>@comp.ActividadComprada.Nombre</td>
+    <td>@comp.CantEntradas</td>
+    <td>@comp.PrecioFinal</td>
+    <td>@comp.FechaCompra</td>
+    <td>@comp.Estado</td>
+    <td>
+        <form method="post">
+
+        <input type="number" value="@comp.Id" name="idCompra" style="display:none">
+        <input type="submit" value="Cancelar compra" >
+
+        </form>
+    </td>
+</tr>
+    }
+</table>

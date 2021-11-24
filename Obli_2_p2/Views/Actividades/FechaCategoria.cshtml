@@ -1,0 +1,92 @@
+﻿
+@if (ViewBag.actividades != null)
+{
+    <table class="table" textaling="center">
+        <tr>
+            <td>Nombre Actividad</td>
+            <td>Categora</td>
+            <td>Lugar</td>
+            <td>Edad Minima</td>
+            <td>Fecha</td>
+        </tr>
+        @foreach (var a in ViewBag.actividades)
+        {
+            <tr>
+                <td>@a.Nombre</td>
+                <td>@a.Categoria </td>
+                <td>@a.Lugar.Nombre</td>
+                <td>@a.MinimaEdad</td>
+                <td>@a.FechaYHora</td>
+            </tr>
+        }
+
+
+
+    </table>
+}
+else
+{
+    if (ViewBag.resultado == null)
+    {
+        <form method="post">
+
+            <label>Fecha 1:</label><br>
+            <input type="date" name="f1" id="f1"><br>
+            <label>Fecha 2:</label><br>
+            <input type="date" name="f2" id="f2"><br>
+            <label>Categoria Actividad:</label><br>
+            <input type="text" name="categoria" id="idCategoria"><br>
+            <input type="submit" value="Aceptar" id="btnSubmit"><br>
+            <div id="listaCat">
+                <table class="table">
+                    <tr>
+                        <td>Categorias disponibles</td>
+                    </tr>
+
+                    @foreach (Categoria item in ViewBag.ListaCat)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                        </tr>
+
+                    }
+
+                </table>
+                <p id="msjResult"></p>
+            </div>
+
+        </form>
+
+    }
+    else
+    {
+        <p>@ViewBag.resultado</p>
+
+    }
+
+
+
+}
+<script>
+
+    document.querySelector("#btnSubmit").addEventListener("submit", validarDatos)
+    function validarDatos(evento) {
+        evento.preventDefault();
+        let categoria = document.querySelector("#idCategoria").value;
+        let f1 = document.querySelector("#f1").value;
+        let f2 = document.querySelector("#f2").value;
+        CambiarEstadoOcultar();
+        if (categoria != "" && f1 != f2) {
+
+            this.submit();
+        } else {
+            document.querySelector("#msjResult").innerHTML = 'Vuelva a intentar';
+
+        }
+    }
+    function CambiarEstadoOcultar() {
+        document.querySelector("#listaCat").style.display = "none";
+    }
+
+
+</script>

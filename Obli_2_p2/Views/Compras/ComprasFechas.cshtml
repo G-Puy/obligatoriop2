@@ -1,0 +1,65 @@
+﻿<div id="divSubmit">
+    <form method="post" id="btnSub">
+        <label>Fecha 1:</label><br>
+        <input type="date" name="f1" id="f1"><br>
+        <label>Fecha 2:</label><br>
+        <input type="date" name="f2" id="f2"><br>
+        <input type="submit" value="Aceptar" id="">
+    </form>
+
+    <p id="msjResult"></p>
+
+</div>
+@if (ViewBag.compras != null)
+{
+    <table border="1" textaling="center">
+        <tr>
+            <td>Nombre Actividad</td>
+            <td>Cantidad Entradas</td>
+            <td>Total</td>
+            <td>Fecha y hora</td>
+            <td>Estado</td>
+
+        </tr>
+        @foreach (var comp in ViewBag.compras)
+        {
+            <tr>
+                <td>@comp.ActividadComprada.Nombre</td>
+                <td>@comp.CantEntradas</td>
+                <td>@comp.PrecioFinal</td>
+                <td>@comp.FechaCompra</td>
+                <td>@comp.Estado</td>
+            </tr>
+        }
+    </table>
+    <p>@ViewBag.Precio</p>
+
+
+
+
+
+}
+else
+{
+    <p>@ViewBag.errorFechas</p>
+}
+
+
+
+
+<script>
+    document.querySelector("#btnSub").addEventListener("submit", VerificarDAtos);
+    function VerificarDAtos(evento) {
+        evento.preventDefault();
+        fecha1 = document.querySelector("#f1").value;
+        fecha2 = document.querySelector("#f2").value;
+        if (fecha1 != fecha2) {
+            this.submit();
+        } else {
+            document.querySelector("#msjResult").innerHTML = 'Verifique las fechas';
+        }
+    }
+    
+
+
+</script>

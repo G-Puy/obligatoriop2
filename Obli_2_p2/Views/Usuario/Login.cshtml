@@ -1,0 +1,27 @@
+﻿<h1>LOG IN</h1>
+
+<form method="post" id="postid">
+    <label>Ingrese nombre de usuario: </label><br>
+    <input type="text" class="form-control col-12 col-md-6 col-xl-4" name="nick" id="idNombre"><br>
+    <label>Ingrese password</label><br>
+    <input type="password" class="form-control col-12 col-md-6 col-xl-4" name="pass" id="idPass"><br>
+    <input type="submit" value="Log in"><br>
+</form>
+<p id="msj"></p>
+<p>@ViewBag.Msj</p>
+<p>@Html.ActionLink("Registro", "RegistrarCliente")</p>
+
+<script>
+    document.querySelector("#postid").addEventListener("submit", verificarDatos);
+
+    function verificarDatos(evento) {
+        evento.preventDefault();
+       let nombre = document.querySelector("#idNombre").value;
+        let pass = document.querySelector("#idNombre").value;
+        if (nombre != "" && pass != "") {
+            this.submit();
+        }else {
+            document.querySelector("#msj").innerHTML = "Verifique los datos";
+        }
+    }
+</script>

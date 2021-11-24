@@ -1,0 +1,41 @@
+﻿<h1>Bienvenido @ViewBag.UsuAct.Nombre</h1>
+
+
+<h2>Actividades disponibles</h2>
+<table border="1" textaling="center">
+    <tr>
+        <td>Nombre</td>
+        <td>Categoria</td>
+        <td>Fecha y hora</td>
+        <td>Lugar</td>
+        <td>Edad minima</td>
+        <td>Cantidad de me gusta</td>
+        <td>Precio actividad</td>
+    </tr>
+    @foreach (var act in ViewBag.ListaActividades)
+    {
+        <tr>
+            <td>@act.Nombre</td>
+            <td>@act.Categoria</td>
+            <td>@act.FechaYHora</td>
+            <td>@act.Lugar</td>
+            <td>@act.MinimaEdad</td>
+            <td>@act.CantidadMG</td>
+
+            <td>
+                <form id="formLike" method="post">
+                    <input type="number" name="idActividadActual" value="@act.idActi" style="display:none"><br>
+                    <input type="submit" value="Me Gusta" id="btnlike">
+                </form>
+            </td>
+
+            <td>@act.PrecioActividad()</td>
+            <td>@Html.ActionLink("Comprar", "DetallesCompra", "Compras", new { idActividad = act.idActi })</td>
+        </tr>
+    }
+
+
+
+</table>
+
+
